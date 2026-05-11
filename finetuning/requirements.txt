@@ -1,0 +1,39 @@
+# ── Finetuning environment (envs_fomo_finetune) ────────────────────────────────
+# Install with:
+#   conda create -n fomo_finetune python=3.11
+#   pip install -r finetuning/requirements.txt
+#
+# This environment is separate from pretraining. It needs access to the
+# pretraining package source (dinov3/, 3DINO/, train_dino3d*.py) for backbone
+# loading, but does NOT need to run training.
+
+# Core deep learning
+torch==2.3.0
+torchvision==0.18.0
+
+# Training framework
+lightning==2.3.0
+torchmetrics==1.4.0
+
+# Medical imaging
+monai[all]==1.3.0
+nibabel==5.2.1
+SimpleITK==2.3.1
+
+# Metrics
+scikit-learn==1.5.0
+scipy==1.13.1
+
+# Numerical
+numpy==1.26.4
+
+# Logging
+wandb==0.17.0
+
+# Utilities
+tqdm==4.66.4
+einops==0.8.0
+
+# ── PYTHONPATH setup (add to your shell profile or activation script) ──────────
+# export CHALLENGE=/path/to/challenge
+# export PYTHONPATH=$CHALLENGE/finetuning/src:$CHALLENGE/pretraining:$CHALLENGE/dinov3:$CHALLENGE/3DINO:$PYTHONPATH

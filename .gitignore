@@ -1,0 +1,70 @@
+# ── Data (too large for git) ───────────────────────────────────────────────────
+fomo/
+fomo_preprocessed/
+fomo_test_preprocessed/
+*.npy
+*.npz
+*.nii
+*.nii.gz
+*.zip
+*.sif
+*.img
+
+# ── Model checkpoints & weights ───────────────────────────────────────────────
+outputs/
+embeddings/
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+wandb/
+logs/
+
+# ── External repos (cloned locally via setup.sh) ──────────────────────────────
+3DINO/
+BrainIAC/
+dinov3/
+rope-nd/
+mri_foundation/
+fomo25/
+baseline-codebase/
+container-validator/
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+.env
+.venv/
+venv/
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Duplicate root-level scripts (canonical copies in pretraining/) ────────────
+/train_dino3d.py
+/train_dino3d_v2.py
+/train_dino3d_v3.py
+/submit_v2_hpc.slurm
+/slurm/
+
+# ── Root-level environment ymls (canonical copies go in pretraining/) ──────────
+/environment_v1.yml
+/environment_v2.yml
+
+# ── Claude Code internal state ────────────────────────────────────────────────
+.claude/
+
+# ── IDE / OS ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*~

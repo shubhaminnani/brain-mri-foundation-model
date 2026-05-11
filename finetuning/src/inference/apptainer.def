@@ -1,0 +1,63 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime
+
+%labels
+    Author FOMO2JOMO
+    Challenge FOMO26
+    Version 1.0
+
+%post
+    apt-get update -qq && apt-get install -y --no-install-recommends \
+        git wget curl ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+    pip install --no-cache-dir \
+        lightning==2.3.* \
+        monai==1.3.* \
+        nibabel==5.* \
+        scikit-learn==1.5.* \
+        scipy==1.13.* \
+        torchmetrics==1.4.* \
+        numpy==1.26.*
+
+    # Copy challenge source into container
+    mkdir -p /challenge
+
+%files
+    # Finetuning source
+    finetuning/src /challenge/finetuning/src
+
+    # Pretraining package dependencies (needed for backbone loading)
+    pretraining/train_dino3d.py   /challenge/pretraining/train_dino3d.py
+    pretraining/train_dino3d_v2.py /challenge/pretraining/train_dino3d_v2.py
+    pretraining/train_dino3d_v3.py /challenge/pretraining/train_dino3d_v3.py
+    3DINO /challenge/3DINO
+    dinov3 /challenge/dinov3
+
+    # Checkpoints (adjust paths to actual checkpoint locations)
+    # outputs/dino3d_v1/last.ckpt  /challenge/checkpoints/v1_last.ckpt
+    # outputs/dino3d_v2/last.ckpt  /challenge/checkpoints/v2_last.ckpt
+    # outputs/dino3d_v3/last.ckpt  /challenge/checkpoints/v3_last.ckpt
+
+    # Finetuned task checkpoints (produced by finetune.py)
+    # models/task1_v3/last.ckpt  /challenge/finetune/task1_v3.ckpt
+    # ...
+
+%environment
+    export PYTHONPATH=/challenge/finetuning/src:/challenge/pretraining:/challenge/dinov3:/challenge/3DINO:$PYTHONPATH
+    export PYTHONNOUSERSITE=1
+
+%runscript
+    exec python /challenge/finetuning/src/inference/predict.py "$@"
+
+%help
+    FOMO26 Inference Container
+
+    Usage:
+      apptainer run fomo26.sif \
+          --task <1-7> \
+          --model <v1|v2|v3> \
+          --checkpoint /challenge/checkpoints/<version>_last.ckpt \
+          --finetune_ckpt /challenge/finetune/task<N>_<version>.ckpt \
+          --input_dir /input \
+          --output_dir /output
