@@ -1,5 +1,9 @@
 # FOMO26 — Brain MRI Foundation Model Challenge
 
+<p align="center">
+  <img src="assets/overview.png" alt="Overview: 3D DINOv2/iBOT pretraining on FOMO300K, ViT-B/ViT-L backbones, and the seven downstream tasks" width="600">
+</p>
+
 **Team: USSB** · MICCAI 2026
 
 This repository contains our complete solution for the FOMO26 Challenge: self-supervised pretraining of 3D brain MRI foundation models on **FOMO300K** (306,207 scans, 58,741 subjects), followed by evaluation on 7 downstream tasks covering classification, segmentation, regression, and representation quality.
@@ -444,3 +448,20 @@ apptainer run fomo26.sif \
 - **UNETR**: Hatamizadeh et al. UNETR: Transformers for 3D Medical Image Segmentation. WACV 2022.
 - **MONAI**: MONAI Consortium. Project MONAI. GitHub 2020.
 - **FOMO25 Baseline**: Llambias et al. Yucca: A deep learning framework for medical image analysis. arXiv 2024.
+
+---
+
+## Citation
+
+```bibtex
+@InProceedings{InnShu_Scaling_MICCAISAT2026,
+        author = { Innani, Shubham AND Pitarch-Abaigar, Carla AND Bakas, Spyridon},
+        title = { { Scaling Native 3D Self-Supervised DINOv2 for Brain MRI Foundation Models } },
+        booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2026 Workshops and Challenges},
+        year = {2026},
+        publisher = {Springer Nature Switzerland},
+        volume = {LNCS 17254},
+        month = {pending},
+        page = {pending}
+}
+```
